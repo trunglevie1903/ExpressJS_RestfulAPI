@@ -27,6 +27,7 @@
     "@services": "src/services",
     "@routes": "src/routes",
     "@middlewares": "src/middlewares",
-    "@db": "src/db"
+    "@db": "src/db",
+    "@controllers": "src/controllers"
   }
 }

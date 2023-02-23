@@ -9,9 +9,9 @@ const connectDatabase_mongodb = (path, user, password) => {
   return connectMongoDB.connect_mongodb(uri);
 };
 
-const connectDatabase_mysql = (host, user, password, dbname) => {
+const connectDatabase_mysql = (db_config) => {
   Logging.log('Trying to connect to MySQL...');
-  return connectMySQL.connect_mysql(host, user, password, dbname);
+  return connectMySQL.connect_mysql(db_config);
 };
 
 module.exports = {

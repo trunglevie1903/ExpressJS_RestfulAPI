@@ -8,10 +8,12 @@ const Logging = require('@utils/Logging');
 const defaultServices = require('@services/default_services');
 const defaultMiddlewares = require('@middlewares/default_middlewares');
 const connectDatabase = require('@services/connect_database');
+const mysqlConfig = require('@services/mysql_config');
+
+const PL_Router = require('@routes/programming_languages');
 
 const {
   MONGO_PATH, MONGO_USER, MONGO_PASSWORD,
-  MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DBNAME,
   PORT
 } = process.env;
 const port = PORT || 3001;
@@ -25,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(defaultMiddlewares.logRequestInfo);
 
 /** Routes */
+app.use('/programming-languages', PL_Router);
 app.use('/ping', defaultMiddlewares.healthCheck);
 app.use('/', defaultServices.getHomePage);
 
@@ -35,7 +38,7 @@ const httpServer = http.createServer(app);
 const start = async () => {
   try {
     await connectDatabase.connectDatabase_mongodb(MONGO_PATH, MONGO_USER, MONGO_PASSWORD);
-    await connectDatabase.connectDatabase_mysql(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DBNAME);
+    await connectDatabase.connectDatabase_mysql(mysqlConfig.config.db);
     httpServer.listen(port, () => {
       Logging.log(`Server started on port ${port}`);
     });
