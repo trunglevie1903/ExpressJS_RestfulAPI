@@ -17,6 +17,43 @@ const getMultiple = async (page = 1) => {
   };
 };
 
+const create = async (pl) => {
+  // Logging.info(`PL: ${pl.name}, ${pl.released_year}, ${pl.githut_rank}, ${pl.pypl_rank}, ${pl.tiobe_rank}`);
+  const result = await mysqlServices.query(
+    `INSERT INTO programming_languages
+    (name, released_year, githut_rank, pypl_rank, tiobe_rank)
+    VALUES
+    ("${pl.name}", "${pl.released_year}", "${pl.githut_rank}", "${pl.pypl_rank}", "${pl.tiobe_rank}");`
+  );
+  let message = ((result.affectedRows) ? 'Programming language created successfully' : 'Error in creating programming language');
+  // let message = '...';
+  return { message };
+};
+
+const update = async (id, programming_language) => {
+  const { name, released_year, githut_rank, pypl_rank, tiobe_rank } = programming_language;
+  const result = await mysqlServices.query(
+    `
+      UPDATE programming_languages
+      SET name="${name}", released_year="${released_year}", githut_rank="${githut_rank}", pypl_rank="${pypl_rank}", tiobe_rank="${tiobe_rank}"
+      WHERE id=${id};
+    `
+  );
+  let message = ((result.affectedRows) ? 'Programming language updated successfully' : 'Error in updating programming language');
+  return { message };
+};
+
+const remove = async (id) => {
+  const result = await mysqlServices.query(`
+    DELETE FROM programming_languages WHERE id=${id};
+  `);
+  let message = ((result.affectedRows) ? 'Programming language deleted successfully' : 'Error in deleting programming language');
+  return { message };
+};
+
 module.exports = {
-  getMultiple
+  getMultiple,
+  create,
+  update,
+  remove
 };
