@@ -1,0 +1,32 @@
+### MYSQL GetMultiple
+GET http://localhost:3333/programming-languages?page=2
+
+
+### MYSQL Create
+POST http://localhost:3333/programming-languages
+Content-Type: application/json
+
+{
+  "name": "TlvLang",
+  "released_year": 2023,
+  "githut_rank": 25,
+  "pypl_rank": 25,
+  "tiobe_rank": 25
+}
+
+### MYSQL Update
+
+PATCH http://localhost:3333/programming-languages/19
+Content-Type: application/json
+
+{
+  "name": "TlvLang",
+  "released_year": 2023,
+  "githut_rank": 25,
+  "pypl_rank": 25,
+  "tiobe_rank": 25
+}
+
+### MYSQL Delete
+DELETE http://localhost:3333/programming_languages/19
+

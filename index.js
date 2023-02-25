@@ -10,7 +10,8 @@ const defaultMiddlewares = require('@middlewares/default_middlewares');
 const connectDatabase = require('@services/connect_database');
 const mysqlConfig = require('@services/mysql_config');
 
-const PL_Router = require('@routes/programming_languages');
+const PL_Router = require('@routes/programming_languages.mysql');
+const PL_MongoDB_Router = require('@routes/programming_languages.mongodb');
 
 const {
   MONGO_PATH, MONGO_USER, MONGO_PASSWORD,
@@ -28,6 +29,7 @@ app.use(defaultMiddlewares.logRequestInfo);
 
 /** Routes */
 app.use('/programming-languages', PL_Router);
+app.use('/programming-languages-mongodb', PL_MongoDB_Router);
 app.use('/ping', defaultMiddlewares.healthCheck);
 app.use('/', defaultServices.getHomePage);
 

@@ -28,6 +28,7 @@
     "@routes": "src/routes",
     "@middlewares": "src/middlewares",
     "@db": "src/db",
-    "@controllers": "src/controllers"
+    "@controllers": "src/controllers",
+    "@models": "src/models"
   }
 }

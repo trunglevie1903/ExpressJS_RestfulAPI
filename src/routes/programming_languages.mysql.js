@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const Controller = require('@controllers/programming_languages.controller');
+const Controller = require('@middlewares/programming_languages.mysql.middlewares');
 
 const router = Router();
 
